@@ -1,6 +1,6 @@
 using System;
 
-namespace DioSeriesWebMvc.Models
+namespace DioSeriesWebMvc.Models.ViewModels
 {
     public class ErrorViewModel
     {
