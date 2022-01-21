@@ -17,7 +17,8 @@ namespace DioSeriesWebMvc.Controllers
 
         public IActionResult About()
         {
-            ViewData["Message"] = "Your application description page.";
+            ViewData["Message"] = "Gym Dio Web MVC App to Decola Tech";
+            ViewData["Student"] = "Henrique Benjamim";
 
             return View();
         }
