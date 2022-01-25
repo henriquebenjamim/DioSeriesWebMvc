@@ -3,14 +3,16 @@ using System;
 using DioSeriesWebMvc.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DioSeriesWebMvc.Migrations
 {
     [DbContext(typeof(DioSeriesWebMvcContext))]
-    partial class DioSeriesWebMvcContextModelSnapshot : ModelSnapshot
+    [Migration("20220125061435_OtherEntities")]
+    partial class OtherEntities
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
