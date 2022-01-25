@@ -37,7 +37,8 @@ namespace DioSeriesWebMvc
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             services.AddDbContext<DioSeriesWebMvcContext>(options =>
-                    options.UseSqlServer(Configuration.GetConnectionString("DioSeriesWebMvcContext")));
+                    options.UseMySql(Configuration.GetConnectionString("DioSeriesWebMvcContext"), builder =>
+                        builder.MigrationsAssembly("DioSeriesWebMvc")));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
