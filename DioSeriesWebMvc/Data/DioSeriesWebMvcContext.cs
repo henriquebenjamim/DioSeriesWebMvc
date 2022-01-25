@@ -13,6 +13,8 @@ namespace DioSeriesWebMvc.Models
         {
         }
 
-        public DbSet<DioSeriesWebMvc.Models.GymDepartment> GymDepartment { get; set; }
+        public DbSet<GymDepartment> GymDepartment { get; set; }
+        public DbSet<Gymming> Gymming { get; set; }
+        public DbSet<GymmingRecord> GymmingRecord { get; set; }
     }
 }

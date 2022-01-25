@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
+
 
 namespace DioSeriesWebMvc.Models
 {
@@ -9,6 +9,29 @@ namespace DioSeriesWebMvc.Models
     {
         public int Id { get; set; }
 
-        public string Name { get; set;  }
+        public string Name { get; set; }
+
+        public ICollection<Gymming> Gymmings { get; set; } = new List<Gymming>();
+
+        public GymDepartment()
+        {
+        }
+
+        public GymDepartment(int id, string name)
+        {
+            Id = id;
+            Name = name;
+
+        }
+
+        public void AddGymming(Gymming gymming)
+        {
+            Gymmings.Add(gymming);
+        }
+
+        public double TotalGym(DateTime initial, DateTime final)
+        {
+            return Gymmings.Sum(gymming => gymming.TotalGym(initial, final));
+        }
     }
 }
