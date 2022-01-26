@@ -27,5 +27,18 @@ namespace DioSeriesWebMvc.Services
             _context.Add(obj);
             _context.SaveChanges();
         }
+
+        public Gymming FindById(int id)
+        {   
+
+            return _context.Gymming.FirstOrDefault(obj => obj.Id == id);
+        }
+        
+        public void Remove(int id)
+        {
+            var obj = _context.Gymming.Find(id);
+            _context.Gymming.Remove(obj);
+            _context.SaveChanges();
+        }
     }
 }

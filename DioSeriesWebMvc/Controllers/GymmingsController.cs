@@ -13,8 +13,8 @@ namespace DioSeriesWebMvc.Controllers
     {
         private readonly GymmingService _gymmingService;
         private readonly GymDepartmentService _gymDepartmentService;
-        
-        public GymmingsController(GymmingService gymmingService, GymDepartmentService gymDepartmentService) 
+
+        public GymmingsController(GymmingService gymmingService, GymDepartmentService gymDepartmentService)
         {
             _gymmingService = gymmingService;
             _gymDepartmentService = gymDepartmentService;
@@ -25,7 +25,7 @@ namespace DioSeriesWebMvc.Controllers
             return View(list);
         }
 
-        public IActionResult Create() 
+        public IActionResult Create()
         {
             var gymDeparments = _gymDepartmentService.FindAll();
             var viewModel = new GymmingFormViewModel { GymDepartments = gymDeparments };
@@ -37,6 +37,32 @@ namespace DioSeriesWebMvc.Controllers
         public IActionResult Create(Gymming gymming)
         {
             _gymmingService.Insert(gymming);
+            return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult Delete(int? id)
+        {
+            
+            if (id == null)
+            {
+                return NotFound();
+            }
+            
+            var obj = _gymmingService.FindById(id.Value);
+
+            if (obj == null)
+            {
+                return NotFound();
+            }
+            
+            return View(obj);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Delete(int id)
+        {
+            _gymmingService.Remove(id);
             return RedirectToAction(nameof(Index));
         }
     }
