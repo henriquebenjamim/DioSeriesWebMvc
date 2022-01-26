@@ -38,6 +38,12 @@ namespace DioSeriesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Create(Gymming gymming)
         {
+            if (!ModelState.IsValid)
+            {
+                var gymDepartments = _gymDepartmentService.FindAll();
+                var viewModel = new GymmingFormViewModel { Gymming = gymming, GymDepartments = gymDepartments };
+                return View(viewModel);
+            }
             _gymmingService.Insert(gymming);
             return RedirectToAction(nameof(Index));
         }
@@ -106,6 +112,12 @@ namespace DioSeriesWebMvc.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult Edit(int id, Gymming gymming)
         {
+            if (!ModelState.IsValid)
+            {
+                var gymDepartments = _gymDepartmentService.FindAll();
+                var viewModel = new GymmingFormViewModel { Gymming = gymming, GymDepartments = gymDepartments };
+                return View(viewModel);
+            }
             if (id != gymming.Id)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id mismatch" });
