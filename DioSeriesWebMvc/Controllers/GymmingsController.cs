@@ -1,4 +1,5 @@
 ﻿using DioSeriesWebMvc.Models;
+using DioSeriesWebMvc.Models.ViewModels;
 using DioSeriesWebMvc.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -11,10 +12,12 @@ namespace DioSeriesWebMvc.Controllers
     public class GymmingsController : Controller
     {
         private readonly GymmingService _gymmingService;
+        private readonly GymDepartmentService _gymDepartmentService;
         
-        public GymmingsController(GymmingService gymmingService) 
+        public GymmingsController(GymmingService gymmingService, GymDepartmentService gymDepartmentService) 
         {
             _gymmingService = gymmingService;
+            _gymDepartmentService = gymDepartmentService;
         }
         public IActionResult Index()
         {
@@ -24,7 +27,9 @@ namespace DioSeriesWebMvc.Controllers
 
         public IActionResult Create() 
         {
-            return View();
+            var gymDeparments = _gymDepartmentService.FindAll();
+            var viewModel = new GymmingFormViewModel { GymDepartments = gymDeparments };
+            return View(viewModel);
         }
 
         [HttpPost]

@@ -1,4 +1,4 @@
-﻿@model DioSeriesWebMvc.Models.Gymming
+﻿@model DioSeriesWebMvc.Models.ViewModels.GymmingFormViewModel;
 
 
 @{ 
@@ -13,16 +13,20 @@
     <div class="col-md-4">
         <form asp-action="Create">
             <div class="form-group">
-                <label asp-for="Name" class="control-label"></label>
-                <input asp-for="Name" class="form-control" />
+                <label asp-for="Gymming.Name" class="control-label"></label>
+                <input asp-for="Gymming.Name" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="Email" class="control-label"></label>
-                <input asp-for="Email" class="form-control" />
+                <label asp-for="Gymming.Email" class="control-label"></label>
+                <input asp-for="Gymming.Email" class="form-control" />
             </div>
             <div class="form-group">
-                <label asp-for="BirthDate" class="control-label"></label>
-                <input asp-for="BirthDate" class="form-control" />
+                <label asp-for="Gymming. BirthDate" class="control-label"></label>
+                <input asp-for="Gymming.BirthDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Gymming.GymDepartmentId" class="control-label"></label>
+                <select asp-for="Gymming.GymDepartmentId" asp-items="@(new SelectList(Model.GymDepartments,"Id","Name"))" class="form-control"></select>
             </div>
             <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-default" />

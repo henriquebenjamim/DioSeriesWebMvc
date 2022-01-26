@@ -24,7 +24,6 @@ namespace DioSeriesWebMvc.Services
 
         public void Insert(Gymming obj)
         {
-            obj.GymDepartment = _context.GymDepartment.First();
             _context.Add(obj);
             _context.SaveChanges();
         }
