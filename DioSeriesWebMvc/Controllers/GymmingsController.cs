@@ -1,6 +1,7 @@
 ﻿using DioSeriesWebMvc.Models;
 using DioSeriesWebMvc.Models.ViewModels;
 using DioSeriesWebMvc.Services;
+using DioSeriesWebMvc.Services.Exceptions;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -80,6 +81,47 @@ namespace DioSeriesWebMvc.Controllers
             }
 
             return View(obj);
+        }
+
+        public IActionResult Edit(int? id) 
+        {
+            if(id == null)
+            {
+                return NotFound();
+            }
+
+            var obj = _gymmingService.FindById(id.Value);
+            if(obj == null)
+            {
+                return NotFound();
+            }
+
+            List<GymDepartment> gymDepartments = _gymDepartmentService.FindAll();
+            GymmingFormViewModel viewModel = new GymmingFormViewModel { Gymming = obj, GymDepartments = gymDepartments };
+
+            return View(viewModel);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Edit(int id, Gymming gymming)
+        {
+            if (id != gymming.Id)
+            {
+                return BadRequest();
+            }
+            try
+            {
+                _gymmingService.Update(gymming);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (NotFoundException)
+            {
+                return NotFound();
+            }
+            catch (DbConcurrencyException)
+            {
+                return BadRequest();
+            }
         }
     }
 }

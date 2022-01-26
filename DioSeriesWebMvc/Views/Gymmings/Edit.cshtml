@@ -1,0 +1,37 @@
+﻿@model DioSeriesWebMvc.Models.ViewModels.GymmingFormViewModel
+
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+<h4>Gymmings</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="Gymming.Id" />
+            <div class="form-group">
+                <label asp-for="Gymming.Name" class="control-label"></label>
+                <input asp-for="Gymming.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Gymming.Email" class="control-label"></label>
+                <input asp-for="Gymming.Email" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Gymming. BirthDate" class="control-label"></label>
+                <input asp-for="Gymming.BirthDate" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="Gymming.GymDepartmentId" class="control-label"></label>
+                <select asp-for="Gymming.GymDepartmentId" asp-items="@(new SelectList(Model.GymDepartments,"Id","Name"))" class="form-control"></select>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
