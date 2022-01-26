@@ -12,6 +12,7 @@ namespace DioSeriesWebMvc.Models
         public string Name { get; set; }
         public string Email { get; set; }
         public DateTime BirthDate { get; set; }
+        //public double NumberTrain { get; set; }
         public int Categorie { get; set; }
         public GymDepartment GymDepartment { get; set; }
         public ICollection<GymmingRecord> Gym { get; set; } = new List<GymmingRecord>();

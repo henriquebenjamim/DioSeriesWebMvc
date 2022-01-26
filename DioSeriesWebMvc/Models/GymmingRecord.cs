@@ -19,9 +19,11 @@ namespace DioSeriesWebMvc.Models
         {
         }
 
-        public GymmingRecord(int id, GymCategories status, Gymming gymming)
+        public GymmingRecord(int id, DateTime date, double amount, GymCategories status, Gymming gymming)
         {
             Id = id;
+            Date = date;
+            Amount = amount;
             Status = status;
             Gymming = gymming;
         }

@@ -11,6 +11,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DioSeriesWebMvc.Models;
+using DioSeriesWebMvc.Data;
 
 namespace DioSeriesWebMvc
 {
@@ -39,14 +40,18 @@ namespace DioSeriesWebMvc
             services.AddDbContext<DioSeriesWebMvcContext>(options =>
                     options.UseMySql(Configuration.GetConnectionString("DioSeriesWebMvcContext"), builder =>
                         builder.MigrationsAssembly("DioSeriesWebMvc")));
+
+            //Registro da classe seedingservice no sistema de injeção de independencia, isso permite que o serviço possa ser usado ou usar outro
+            services.AddScoped<SeedingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env, SeedingService seedingService)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                seedingService.Seed();
             }
             else
             {

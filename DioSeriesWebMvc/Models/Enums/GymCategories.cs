@@ -7,7 +7,7 @@
         Danca = 2,
         Natacao = 3,
         MusculacaoDanca = 4,
-        MusucalacaoNatacao = 5,
+        MusculacaoNatacao = 5,
         DancaNatacao = 6,
         MusculacaoDancaNatacao = 7
     }
