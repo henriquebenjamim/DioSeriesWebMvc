@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using DioSeriesWebMvc.Models;
 using DioSeriesWebMvc.Data;
+using DioSeriesWebMvc.Services;
 
 namespace DioSeriesWebMvc
 {
@@ -43,6 +44,7 @@ namespace DioSeriesWebMvc
 
             //Registro da classe seedingservice no sistema de injeção de independencia, isso permite que o serviço possa ser usado ou usar outro
             services.AddScoped<SeedingService>();
+            services.AddScoped<GymmingService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
