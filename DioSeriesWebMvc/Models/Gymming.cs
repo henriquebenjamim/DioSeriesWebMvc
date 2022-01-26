@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 
 namespace DioSeriesWebMvc.Models
@@ -10,9 +11,15 @@ namespace DioSeriesWebMvc.Models
         // Gym = gym training
         public int Id { get; set; }
         public string Name { get; set; }
+        [DataType(DataType.EmailAddress)]
         public string Email { get; set; }
+
+        [Display(Name = "Birth Date")]
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
+        [DataType(DataType.Date)]
         public DateTime BirthDate { get; set; }
         //public double NumberTrain { get; set; }
+
         public int Categorie { get; set; }
         public GymDepartment GymDepartment { get; set; }
         public int GymDepartmentId { get; set; }
