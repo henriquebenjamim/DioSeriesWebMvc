@@ -1,4 +1,5 @@
-﻿using DioSeriesWebMvc.Services;
+﻿using DioSeriesWebMvc.Models;
+using DioSeriesWebMvc.Services;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,19 @@ namespace DioSeriesWebMvc.Controllers
         {
             var list = _gymmingService.FindAll();
             return View(list);
+        }
+
+        public IActionResult Create() 
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult Create(Gymming gymming)
+        {
+            _gymmingService.Insert(gymming);
+            return RedirectToAction(nameof(Index));
         }
     }
 }

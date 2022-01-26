@@ -22,5 +22,10 @@ namespace DioSeriesWebMvc.Services
             return _context.Gymming.ToList();
         }
 
+        public void Insert(Gymming obj)
+        {
+            _context.Add(obj);
+            _context.SaveChanges();
+        }
     }
 }
