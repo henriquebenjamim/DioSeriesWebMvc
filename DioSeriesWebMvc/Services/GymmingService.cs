@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DioSeriesWebMvc.Services
 {
@@ -31,7 +32,7 @@ namespace DioSeriesWebMvc.Services
         public Gymming FindById(int id)
         {   
 
-            return _context.Gymming.FirstOrDefault(obj => obj.Id == id);
+            return _context.Gymming.Include(obj => obj.GymDepartment).FirstOrDefault(obj => obj.Id == id);
         }
         
         public void Remove(int id)
