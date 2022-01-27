@@ -38,9 +38,16 @@ namespace DioSeriesWebMvc.Services
         
         public async Task RemoveAsync(int id)
         {
-            var obj = await _context.Gymming.FindAsync(id);
-            _context.Gymming.Remove(obj);
-            await _context.SaveChangesAsync();
+            try
+            {
+                var obj = await _context.Gymming.FindAsync(id);
+                _context.Gymming.Remove(obj);
+                await _context.SaveChangesAsync();
+            }
+            catch(DbUpdateException e)
+            {
+                throw new IntegrityException(e.Message);
+            }
         }
 
         public async Task UpdateAsync(Gymming obj)
