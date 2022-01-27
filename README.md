@@ -45,24 +45,29 @@ Caso tenha interesse em adquirir o curso: [Link do Curso](https://www.udemy.com/
 
 # Tecnologias utilizadas
 ## Back end
-- DotNet 2.1
+- [DotNet 2.1](https://dotnet.microsoft.com/download/dotnet-core/2.1 "Link para download")
 - MySql
 - Entity Framework
 
 ## Front end
-- Asp net Core
+- ASP .NET Core MVC
 - Bootstrap
 
 # Como executar o projeto
   
 ## Pré-requisitos
-- DotNet 2.1
-- AspNet 
+- DotNet 2.1 
 - Entity Framework
 - Visual studio 2019
 - MySql (Importante, na instalação do MySql, utilize a opção de desenvolvedor e quando puder criar um novo usuário, crie um com as especificações:
 Connection name: dev; UserName: developer; Password: 1234567;
 - MySqlWorkbench;
+# Provider para usar o mysql com entity framework
+- usando a interface do Visual Studio:
+- Botão direito no nome do projeto -> Manage NuGet Packages
+- Na aba Browse, pesquise por: Pomelo.EntityFrameworkCore.MySql
+- Clique uma vez no resultado Pomelo.EntityFrameworkCore.Mysql e, na janela ao lado, escolha a versão 2.1.1
+- Clique em Install e conclua a instalação.
 
 ```bash
 # clonar repositório
