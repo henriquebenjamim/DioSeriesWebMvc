@@ -21,34 +21,34 @@ namespace DioSeriesWebMvc.Controllers
             _gymmingService = gymmingService;
             _gymDepartmentService = gymDepartmentService;
         }
-        public IActionResult Index()
+        public async Task<IActionResult> Index()
         {
-            var list = _gymmingService.FindAll();
+            var list = await _gymmingService.FindAllAsync();
             return View(list);
         }
 
-        public IActionResult Create()
+        public async Task<IActionResult> Create()
         {
-            var gymDeparments = _gymDepartmentService.FindAll();
+            var gymDeparments = await _gymDepartmentService.FindAllAsync();
             var viewModel = new GymmingFormViewModel { GymDepartments = gymDeparments };
             return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Create(Gymming gymming)
+        public async Task<IActionResult> Create(Gymming gymming)
         {
             if (!ModelState.IsValid)
             {
-                var gymDepartments = _gymDepartmentService.FindAll();
+                var gymDepartments = await _gymDepartmentService.FindAllAsync();
                 var viewModel = new GymmingFormViewModel { Gymming = gymming, GymDepartments = gymDepartments };
                 return View(viewModel);
             }
-            _gymmingService.Insert(gymming);
+            await _gymmingService.InsertAsync(gymming);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             
             if (id == null)
@@ -56,7 +56,7 @@ namespace DioSeriesWebMvc.Controllers
                 return RedirectToAction(nameof(Error), new { message = "Id not orovided"});
             }
             
-            var obj = _gymmingService.FindById(id.Value);
+            var obj = await _gymmingService.FindByIdAsync(id.Value);
 
             if (obj == null)
             {
@@ -68,20 +68,20 @@ namespace DioSeriesWebMvc.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            _gymmingService.Remove(id);
+            await _gymmingService.RemoveAsync(id);
             return RedirectToAction(nameof(Index));
         }
 
-        public IActionResult Details(int? id)
+        public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
-            var obj = _gymmingService.FindById(id.Value);
+            var obj = await _gymmingService.FindByIdAsync(id.Value);
             if (obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
@@ -90,31 +90,31 @@ namespace DioSeriesWebMvc.Controllers
             return View(obj);
         }
 
-        public IActionResult Edit(int? id) 
+        public async Task<IActionResult> Edit(int? id) 
         {
             if(id == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not provided" });
             }
 
-            var obj = _gymmingService.FindById(id.Value);
+            var obj = await _gymmingService.FindByIdAsync(id.Value);
             if(obj == null)
             {
                 return RedirectToAction(nameof(Error), new { message = "Id not found" });
             }
 
-            List<GymDepartment> gymDepartments = _gymDepartmentService.FindAll();
+            List<GymDepartment> gymDepartments = await _gymDepartmentService.FindAllAsync();
             GymmingFormViewModel viewModel = new GymmingFormViewModel { Gymming = obj, GymDepartments = gymDepartments };
 
             return View(viewModel);
         }
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Edit(int id, Gymming gymming)
+        public async Task<IActionResult> Edit(int id, Gymming gymming)
         {
             if (!ModelState.IsValid)
             {
-                var gymDepartments = _gymDepartmentService.FindAll();
+                var gymDepartments = await _gymDepartmentService.FindAllAsync();
                 var viewModel = new GymmingFormViewModel { Gymming = gymming, GymDepartments = gymDepartments };
                 return View(viewModel);
             }
@@ -124,7 +124,7 @@ namespace DioSeriesWebMvc.Controllers
             }
             try
             {
-                _gymmingService.Update(gymming);
+                await _gymmingService.UpdateAsync(gymming);
                 return RedirectToAction(nameof(Index));
             }
             catch (ApplicationException e)

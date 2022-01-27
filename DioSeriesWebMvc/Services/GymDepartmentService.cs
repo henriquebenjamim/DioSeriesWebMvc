@@ -2,7 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace DioSeriesWebMvc.Services
 {
@@ -15,9 +16,9 @@ namespace DioSeriesWebMvc.Services
             _context = context;
         }
 
-        public List<GymDepartment> FindAll()
+        public async Task<List<GymDepartment>> FindAllAsync()
         {
-            return _context.GymDepartment.OrderBy(x => x.Name).ToList();
+            return await _context.GymDepartment.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }

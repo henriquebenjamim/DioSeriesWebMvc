@@ -19,40 +19,41 @@ namespace DioSeriesWebMvc.Services
         }
 
         // retorna uma lista com todas as pessoas que treinam
-        public List<Gymming> FindAll() 
+        public async Task<List<Gymming>> FindAllAsync() 
         {
-            return _context.Gymming.ToList();
+            return await _context.Gymming.ToListAsync();
         }
 
-        public void Insert(Gymming obj)
+        public async Task InsertAsync(Gymming obj)
         {
             _context.Add(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public Gymming FindById(int id)
+        public async Task<Gymming> FindByIdAsync(int id)
         {   
 
-            return _context.Gymming.Include(obj => obj.GymDepartment).FirstOrDefault(obj => obj.Id == id);
+            return await _context.Gymming.Include(obj => obj.GymDepartment).FirstOrDefaultAsync(obj => obj.Id == id);
         }
         
-        public void Remove(int id)
+        public async Task RemoveAsync(int id)
         {
-            var obj = _context.Gymming.Find(id);
+            var obj = await _context.Gymming.FindAsync(id);
             _context.Gymming.Remove(obj);
-            _context.SaveChanges();
+            await _context.SaveChangesAsync();
         }
 
-        public void Update(Gymming obj)
+        public async Task UpdateAsync(Gymming obj)
         {
-            if(!_context.Gymming.Any(x => x.Id == obj.Id))
+            bool hasAny = await _context.Gymming.AnyAsync(x => x.Id == obj.Id);
+            if (!hasAny)
             {
                 throw new NotFoundException("Id not found!");
             }
             try
             {
                 _context.Update(obj);
-                _context.SaveChanges();
+                await _context.SaveChangesAsync();
             }
             catch(DbConcurrencyException e)
             {
