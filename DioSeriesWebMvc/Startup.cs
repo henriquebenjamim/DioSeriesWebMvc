@@ -48,6 +48,7 @@ namespace DioSeriesWebMvc
             services.AddScoped<SeedingService>();
             services.AddScoped<GymmingService>();
             services.AddScoped<GymDepartmentService>();
+            services.AddScoped<GymmingRecordService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
