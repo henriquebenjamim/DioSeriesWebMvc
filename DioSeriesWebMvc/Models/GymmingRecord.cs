@@ -1,6 +1,7 @@
 ﻿using DioSeriesWebMvc.Models.Enums;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -10,6 +11,8 @@ namespace DioSeriesWebMvc.Models
     {   
         // SalesRecord
         public int Id { get; set; }
+        
+        [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}") ]
         public DateTime Date { get; set; }
         public double Amount { get; set; }
         public GymCategories Status { get; set; }

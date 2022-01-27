@@ -16,8 +16,8 @@ namespace DioSeriesWebMvc.Services
             _context = context;
         }
 
-         public async Task<List<GymmingRecord>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
-         {
+        public async Task<List<GymmingRecord>> FindByDateAsync(DateTime? minDate, DateTime? maxDate)
+        {
             var result = from obj in _context.GymmingRecord select obj;
             if (minDate.HasValue)
             {
@@ -32,6 +32,25 @@ namespace DioSeriesWebMvc.Services
                 .Include(x => x.Gymming.GymDepartment)
                 .OrderByDescending(x => x.Date)
                 .ToListAsync();
-         }
+        }
+
+        public async Task<List<IGrouping<GymDepartment, GymmingRecord>>> FindByDateGroupingAsync(DateTime? minDate, DateTime? maxDate)
+        {
+            var result = from obj in _context.GymmingRecord select obj;
+            if (minDate.HasValue)
+            {
+                result = result.Where(x => x.Date >= minDate.Value);
+            }
+            if (maxDate.HasValue)
+            {
+                result = result.Where(x => x.Date <= maxDate.Value);
+            }
+            return await result
+                .Include(x => x.Gymming)
+                .Include(x => x.Gymming.GymDepartment)
+                .OrderByDescending(x => x.Date)
+                .GroupBy(x => x.Gymming.GymDepartment)
+                .ToListAsync();
+        }
     }
 }
